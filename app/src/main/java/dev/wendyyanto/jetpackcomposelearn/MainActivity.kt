@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -21,7 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                Greeting(name = "Yanto")
+                MyScreenContent()
             }
         }
     }
@@ -34,6 +36,15 @@ fun MyApp(content: @Composable () -> Unit) {
         Surface(color = MaterialTheme.colors.background) {
             content()
         }
+    }
+}
+
+@Composable
+fun MyScreenContent() {
+    Column {
+        Greeting(name = "Android")
+        Divider()
+        Greeting(name = "There")
     }
 }
 
@@ -51,6 +62,6 @@ fun Greeting(name: String) {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        Greeting(name = "Yanto")
+        MyScreenContent()
     }
 }
