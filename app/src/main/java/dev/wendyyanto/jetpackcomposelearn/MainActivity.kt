@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -62,11 +63,14 @@ fun Greeting(name: String) {
     var isSelected by remember {
         mutableStateOf(false)
     }
-    val targetColor = if (isSelected) {
-        Color.Red
-    } else {
-        Color.Transparent
-    }
+
+    val targetColor by animateColorAsState(
+        targetValue = if (isSelected) {
+            Color.Red
+        } else {
+            Color.Transparent
+        }
+    )
 
     Surface(color = targetColor) {
         Text(
