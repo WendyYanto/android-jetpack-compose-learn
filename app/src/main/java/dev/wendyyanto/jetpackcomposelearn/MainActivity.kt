@@ -7,10 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,12 +37,21 @@ fun MyApp(content: @Composable () -> Unit) {
 }
 
 @Composable
+fun Counter() {
+    var counter = 0
+    Button(onClick = { counter++ }) {
+        Text(text = "I have been click $counter times")
+    }
+}
+
+@Composable
 fun MyScreenContent(names: List<String> = listOf("Android", "There")) {
     Column {
         names.forEach { name ->
             Greeting(name = name)
             Divider()
         }
+        Counter()
     }
 }
 
