@@ -50,6 +50,9 @@ fun MyScreenContent(names: List<String> = listOf("Android", "There")) {
         Counter(counter = counter, incrementCount = { newCount ->
             counter = newCount
         })
+        if (counter > 5) {
+            Text(text = "Finally clicked more than 5 times")
+        }
     }
 }
 
