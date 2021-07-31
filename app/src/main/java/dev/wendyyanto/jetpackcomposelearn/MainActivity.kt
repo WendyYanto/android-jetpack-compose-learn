@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -32,8 +33,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Surface(color = Color.Yellow) {
-        Text(text = "Hello $name!",
-            modifier = modifier.padding(16.dp))
+        Text(
+            text = "Hello $name!",
+            modifier = modifier
+                .padding(16.dp)
+                .background(color = Color.Magenta)
+        )
     }
 }
 
