@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -42,10 +43,12 @@ fun MyScreenContent(names: List<String> = listOf("Android", "There")) {
         mutableStateOf(0)
     }
 
-    Column {
-        names.forEach { name ->
-            Greeting(name = name)
-            Divider()
+    Column(modifier = Modifier.fillMaxHeight()) {
+        Column(modifier = Modifier.weight(1f)) {
+            names.forEach { name ->
+                Greeting(name = name)
+                Divider()
+            }
         }
         Counter(counter = counter, incrementCount = { newCount ->
             counter = newCount
