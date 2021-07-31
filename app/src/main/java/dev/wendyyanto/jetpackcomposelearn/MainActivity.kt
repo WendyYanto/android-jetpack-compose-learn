@@ -20,17 +20,19 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MyApp()
+            MyApp {
+                Greeting(name = "Yanto")
+            }
         }
     }
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(content: @Composable () -> Unit) {
     JetpackComposeLearnTheme {
         // A surface container using the 'background' color from the theme
         Surface(color = MaterialTheme.colors.background) {
-            Greeting("Android")
+            content()
         }
     }
 }
@@ -48,7 +50,7 @@ fun Greeting(name: String) {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    JetpackComposeLearnTheme {
-        Greeting("Android")
+    MyApp {
+        Greeting(name = "Yanto")
     }
 }
