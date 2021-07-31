@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -58,10 +59,23 @@ fun MyScreenContent(names: List<String> = List(1000) { "Hello Android $it" }) {
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = Color.Yellow) {
+    var isSelected by remember {
+        mutableStateOf(false)
+    }
+    val targetColor = if (isSelected) {
+        Color.Red
+    } else {
+        Color.Transparent
+    }
+
+    Surface(color = targetColor) {
         Text(
             text = "Hello $name!",
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier
+                .padding(16.dp)
+                .clickable {
+                    isSelected = isSelected.not()
+                }
         )
     }
 }
