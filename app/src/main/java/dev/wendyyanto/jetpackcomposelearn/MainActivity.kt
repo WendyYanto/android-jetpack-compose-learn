@@ -1,6 +1,7 @@
 package dev.wendyyanto.jetpackcomposelearn
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
@@ -11,8 +12,11 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.listSaver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,12 +45,18 @@ fun MyApp(content: @Composable () -> Unit) {
 }
 
 @Composable
-fun MyScreenContent(names: List<String> = List(1000) { "Hello Android $it" }) {
+fun MyScreenContent() {
     var counter by remember {
         mutableStateOf(0)
     }
 
+    var names = mutableListOf("1")
+
     Column(modifier = Modifier.fillMaxHeight()) {
+        InputName {
+            names.add(it)
+            Log.v("Log", names.toString())
+        }
         NamesList(names = names, modifier = Modifier.weight(1f))
         Counter(counter = counter, incrementCount = { newCount ->
             counter = newCount
@@ -91,9 +101,30 @@ fun Counter(counter: Int, incrementCount: (Int) -> Unit) {
 }
 
 @Composable
+fun InputName(onSubmitName : (String) -> Unit) {
+    var name by remember {
+        mutableStateOf("")
+    }
+
+    TextField(
+        value = name,
+        onValueChange = { value ->
+            name = value
+        },
+        label = { Text(text = "Input Name") })
+
+    Button(onClick = {
+        onSubmitName(name)
+        name = ""
+    }) {
+        Text(text = "Submit Button")
+    }
+}
+
+@Composable
 fun NamesList(names: List<String>, modifier: Modifier = Modifier) {
     // RecycleAdapter only 4 lines, OMG !
-    LazyColumn(modifier = modifier) {
+    LazyColumn(modifier = modifier.padding(16.dp)) {
         items(items = names) {
             Greeting(name = it)
             Divider()
