@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.appcompat.widget.Toolbar
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -69,7 +70,8 @@ fun Greeting(name: String) {
             Color.Red
         } else {
             Color.Transparent
-        }
+        },
+        animationSpec = tween(durationMillis = 4000)
     )
 
     Surface(color = targetColor) {
