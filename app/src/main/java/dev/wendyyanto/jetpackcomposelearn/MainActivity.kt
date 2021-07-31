@@ -74,14 +74,13 @@ fun Greeting(name: String) {
         animationSpec = tween(durationMillis = 4000)
     )
 
-    Surface(color = targetColor) {
+    Surface(
+        color = targetColor,
+        modifier = Modifier.clickable { isSelected = isSelected.not() }) {
         Text(
             text = "Hello $name!",
             modifier = Modifier
                 .padding(16.dp)
-                .clickable {
-                    isSelected = isSelected.not()
-                }
         )
     }
 }
