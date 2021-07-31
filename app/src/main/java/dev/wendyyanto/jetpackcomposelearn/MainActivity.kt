@@ -75,6 +75,7 @@ fun Counter(counter: Int, incrementCount: (Int) -> Unit) {
 
 @Composable
 fun NamesList(names: List<String>, modifier: Modifier = Modifier) {
+    // RecycleAdapter only 4 lines, OMG !
     LazyColumn(modifier = modifier) {
         items(items = names) {
             Greeting(name = it)
