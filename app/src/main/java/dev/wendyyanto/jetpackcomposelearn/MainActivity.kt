@@ -38,12 +38,18 @@ fun MyApp(content: @Composable () -> Unit) {
 
 @Composable
 fun MyScreenContent(names: List<String> = listOf("Android", "There")) {
+    var counter by remember {
+        mutableStateOf(0)
+    }
+
     Column {
         names.forEach { name ->
             Greeting(name = name)
             Divider()
         }
-        Counter()
+        Counter(counter = counter, incrementCount = { newCount ->
+            counter = newCount
+        })
     }
 }
 
@@ -58,11 +64,8 @@ fun Greeting(name: String) {
 }
 
 @Composable
-fun Counter() {
-    var counter by remember {
-        mutableStateOf(0)
-    }
-    Button(onClick = { counter++ }) {
+fun Counter(counter: Int, incrementCount: (Int) -> Unit) {
+    Button(onClick = { incrementCount(counter + 1) }) {
         Text(text = "I have been click $counter times")
     }
 }
