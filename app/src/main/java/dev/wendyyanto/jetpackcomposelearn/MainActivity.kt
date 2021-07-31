@@ -45,12 +45,6 @@ fun MyScreenContent(names: List<String> = List(1000) { "Hello Android $it" }) {
 
     Column(modifier = Modifier.fillMaxHeight()) {
         NamesList(names = names, modifier = Modifier.weight(1f))
-        Column(modifier = Modifier.weight(1f)) {
-            names.forEach { name ->
-                Greeting(name = name)
-                Divider()
-            }
-        }
         Counter(counter = counter, incrementCount = { newCount ->
             counter = newCount
         })
@@ -79,7 +73,12 @@ fun Counter(counter: Int, incrementCount: (Int) -> Unit) {
 
 @Composable
 fun NamesList(names: List<String>, modifier: Modifier = Modifier) {
-    
+    Column(modifier = modifier) {
+        names.forEach { name ->
+            Greeting(name = name)
+            Divider()
+        }
+    }
 }
 
 @Preview(showBackground = true)
