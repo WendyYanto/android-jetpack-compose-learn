@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,7 +41,7 @@ fun MyApp(content: @Composable () -> Unit) {
 
 @Composable
 fun Counter() {
-    var counter = 0
+    var counter by mutableStateOf(0)
     Button(onClick = { counter++ }) {
         Text(text = "I have been click $counter times")
     }
